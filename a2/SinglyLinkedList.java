@@ -127,6 +127,33 @@ public class SinglyLinkedList<T> {
     }
 
     /**
+     * add at index.
+     * 
+     * @param index, data 
+     * @return none
+     */
+    public void addAtIndex(int index, T data) {
+        SinglyLinkedListNode<T> newNode = new SinglyLinkedListNode<>(data);
+        if (index == 0) {
+            newNode.setNext(head);
+            head = newNode;
+            size++;
+        } else if (index == size) {
+            tail.setNext(newNode);
+            tail = newNode;
+            size++;
+        } else {
+            SinglyLinkedListNode<T> curr = head;
+            for (int i = 0; i < index - 1; i++) {
+                curr = curr.getNext();
+            }
+            newNode.setNext(curr.getNext());
+            curr.setNext(newNode);
+            size++;
+        }
+    }
+
+    /**
      * Returns the head node of the list.
      *
      * For grading purposes only. You shouldn't need to use this method since

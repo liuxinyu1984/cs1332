@@ -27,8 +27,20 @@ public class testSinglyLinkedList {
         sll.display();
     }
 
+    public static void test_insert() {
+        SinglyLinkedList<Integer> sll = new SinglyLinkedList<>();
+        int n = 10;
+        for(int i = 0; i < n; i++) {
+            sll.addToBack(i);
+        }
+        sll.display();
+        sll.addAtIndex(3, 97);
+        sll.display();
+    }
+
     public static void main(String[] args) {
         //test_display();
-        test_remove();
+        //test_remove();
+        test_insert();
     }
 }
