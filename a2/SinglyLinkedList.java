@@ -7,7 +7,6 @@ import java.util.NoSuchElementException;
  */
 public class SinglyLinkedList<T> {
 
-
     /*
      * Do not add new instance variables or modify existing ones.
      */
@@ -115,7 +114,7 @@ public class SinglyLinkedList<T> {
             size--;
         } else {
             SinglyLinkedListNode<T> current = head;
-            while(current.getNext().getNext() != null) {
+            while (current.getNext().getNext() != null) {
                 current = current.getNext();
             }
             removedData = current.getNext().getData();
@@ -129,27 +128,33 @@ public class SinglyLinkedList<T> {
     /**
      * add at index.
      * 
-     * @param index, data 
+     * @param index, data
      * @return none
      */
     public void addAtIndex(int index, T data) {
         SinglyLinkedListNode<T> newNode = new SinglyLinkedListNode<>(data);
-        if (index == 0) {
-            newNode.setNext(head);
+        if (size == 0) {
             head = newNode;
-            size++;
-        } else if (index == size) {
-            tail.setNext(newNode);
             tail = newNode;
             size++;
         } else {
-            SinglyLinkedListNode<T> curr = head;
-            for (int i = 0; i < index - 1; i++) {
-                curr = curr.getNext();
+            if (index == 0) {
+                newNode.setNext(head);
+                head = newNode;
+                size++;
+            } else if (index == size) {
+                tail.setNext(newNode);
+                tail = newNode;
+                size++;
+            } else {
+                SinglyLinkedListNode<T> curr = head;
+                for (int i = 0; i < index - 1; i++) {
+                    curr = curr.getNext();
+                }
+                newNode.setNext(curr.getNext());
+                curr.setNext(newNode);
+                size++;
             }
-            newNode.setNext(curr.getNext());
-            curr.setNext(newNode);
-            size++;
         }
     }
 
@@ -204,7 +209,7 @@ public class SinglyLinkedList<T> {
             System.out.println("tail -> " + tail.getData());
             String listToDisplay = "";
             SinglyLinkedListNode<T> curr = head;
-            while(curr.getNext() != null) {
+            while (curr.getNext() != null) {
                 listToDisplay += curr.getData().toString() + "->";
                 curr = curr.getNext();
             }

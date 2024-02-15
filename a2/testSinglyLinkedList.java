@@ -17,7 +17,7 @@ public class testSinglyLinkedList {
     public static void test_remove() {
         SinglyLinkedList<Integer> sll = new SinglyLinkedList<>();
         int n = 10;
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             sll.addToBack(i);
         }
         sll.display();
@@ -30,7 +30,7 @@ public class testSinglyLinkedList {
     public static void test_insert() {
         SinglyLinkedList<Integer> sll = new SinglyLinkedList<>();
         int n = 10;
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             sll.addToBack(i);
         }
         sll.display();
@@ -38,9 +38,18 @@ public class testSinglyLinkedList {
         sll.display();
     }
 
+    public static void test_single() {
+        SinglyLinkedList<Integer> sll = new SinglyLinkedList<>();
+        sll.addAtIndex(0, 1);
+        sll.display();
+        sll.addAtIndex(1, 123);
+        sll.display();
+    }
+
     public static void main(String[] args) {
-        //test_display();
-        //test_remove();
-        test_insert();
+        // test_display();
+        // test_remove();
+        // test_insert();
+        test_single();
     }
 }
