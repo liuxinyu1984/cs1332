@@ -83,10 +83,24 @@ public class testBST {
         System.out.println("Levelorder traverse of tree: " + traverse.levelorder(bst.getRoot()));
     }
 
+    public static void test_contains() {
+        BST<Integer> bst = new BST<>();
+        bst.add(5);
+        bst.add(4);
+        bst.add(7);
+        bst.add(1);
+        bst.add(9);
+        bst.add(0);
+        bst.add(2);
+        bst.add(8);
+        System.out.println(bst.contains(1));
+    }
+
     public static void main(String[] args) {
         // test_add();
         // test_remove_0();
         // test_remove_1();
-        test_remove_2();
+        // test_remove_2();
+        test_contains();
     }
 }

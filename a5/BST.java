@@ -18,6 +18,46 @@ public class BST<T extends Comparable<? super T>> {
      */
 
     /**
+     * Returns whether or not data matching the given parameter is contained
+     * within the tree.
+     *
+     * This should be done recursively.
+     *
+     * Hint: Should you use value equality or reference equality?
+     *
+     * Must be O(log n) for best and average cases and O(n) for worst case.
+     *
+     * @param data The data to search for. You may assume data is never null.
+     * @return true if the parameter is contained within the tree, false otherwise.
+     */
+    public boolean contains(T data) {
+        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        return containsHelper(data, root);
+
+    }
+
+    /**
+     * Helper method
+     * 
+     * @param data data of type T to be searched
+     * @param root root of subtree to search inside
+     * @return true if found, false if not found
+     */
+    private boolean containsHelper(T data, BSTNode<T> root) {
+        if (root == null) { // base case
+            return false;
+        } else {
+            if (root.getData().compareTo(data) == 0) {
+                return true;
+            } else if (root.getData().compareTo(data) > 0) {
+                return containsHelper(data, root.getLeft());
+            } else {
+                return containsHelper(data, root.getRight());
+            }
+        }
+    }
+
+    /**
      * Adds the data to the tree.
      *
      * This must be done recursively.

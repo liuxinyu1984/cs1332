@@ -190,6 +190,29 @@ public class ExternalChainingHashMap<K, V> {
     }
 
     /**
+     * Returns whether or not the key is in the map.
+     *
+     * @param key The key to search for in the map. You may assume that the
+     *            key is never null.
+     * @return true if the key is contained within the map, false otherwise.
+     */
+    public boolean containsKey(K key) {
+        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        if (key == null) {
+            throw new java.lang.IllegalArgumentException("Key cannot be null!");
+        }
+        int index = computeIndex(key, table.length);
+        ExternalChainingMapEntry<K, V> pointer = table[index];
+        while (pointer != null) {
+            if (pointer.getKey().equals(key)) {
+                return true;
+            }
+            pointer = pointer.getNext();
+        }
+        return false;
+    }
+
+    /**
      * Returns the table of the map.
      *
      * For grading purposes only. You shouldn't need to use this method since
