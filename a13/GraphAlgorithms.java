@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 /**
  * Your implementation of various graph traversal algorithms.
@@ -108,5 +109,26 @@ public class GraphAlgorithms {
                 dfsHelper(w, graph, visitedSet, traverse);
             }
         }
+    }
+
+    public static <T> List<Vertex<T>> dfsNonRecursive(Vertex<T> start, Graph<T> graph) {
+        Set<Vertex<T>> visitedSet = new HashSet<>();
+        List<Vertex<T>> traverse = new ArrayList<>();
+        Stack<Vertex<T>> stack = new Stack<>();
+        stack.push(start);
+        while (!stack.isEmpty()) {
+            Vertex<T> v = stack.pop();
+            if (!visitedSet.contains(v)) {
+                visitedSet.add(v);
+                traverse.add(v);
+                for (VertexDistance<T> vd : graph.getAdjList().get(v)) {
+                    Vertex<T> w = vd.getVertex();
+                    if (!visitedSet.contains(w)) {
+                        stack.push(w);
+                    }
+                }
+            }
+        }
+        return traverse;
     }
 }
