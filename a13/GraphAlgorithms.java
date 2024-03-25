@@ -2,10 +2,13 @@ package a13;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
@@ -130,5 +133,42 @@ public class GraphAlgorithms {
             }
         }
         return traverse;
+    }
+
+    public static <T> Map<Vertex<T>, Integer> dijkstra(Vertex<T> start, Graph<T> graph) {
+        PriorityQueue<VertexDistance<T>> pq = new PriorityQueue<>();
+        Map<Vertex<T>, Integer> distanceMap = new HashMap<>();
+        Set<Vertex<T>> visitedSet = new LinkedHashSet<>();
+
+        // fill the distance map with initial values = infinity
+        for (Vertex<T> v : graph.getVertices()) {
+            distanceMap.put(v, Integer.MAX_VALUE);
+        }
+        distanceMap.put(start, 0);
+
+        pq.add(new VertexDistance<>(start, 0));
+
+        while (!pq.isEmpty() && visitedSet.size() < graph.getVertices().size()) {
+            VertexDistance<T> vd = pq.poll();
+            Vertex<T> u = vd.getVertex();
+            int d = vd.getDistance();
+            if (!visitedSet.contains(u)) {
+                // add to visitedSet
+                visitedSet.add(u);
+                // update distanceMap
+                if (d < distanceMap.get(u)) {
+                    distanceMap.put(u, d);
+                }
+                // enqueue all adjacent vertices to priority queue
+                for (VertexDistance<T> vd2 : graph.getAdjList().get(u)) {
+                    Vertex<T> w = vd2.getVertex();
+                    int d2 = vd2.getDistance();
+                    pq.add(new VertexDistance<>(w, d + d2));
+                }
+            }
+        }
+
+        System.out.println(visitedSet);
+        return distanceMap;
     }
 }
